@@ -1,6 +1,6 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var ibmdb = require('ibm_db');
+var express = require("express");
+var bodyParser = require("body-parser");
+var ibmdb = require("ibm_db");
 var app = express();
 
 // configure app to use bodyParser()
@@ -13,17 +13,18 @@ app.use(bodyParser.urlencoded({
 
 // configure HTTP respond header to allow CROS and MIME content-type
 app.all("*", function(req, res, next) {
+	use strict;
 	res.header("Access-Control-Allow-Origin", req.headers.origin);
 
 	// 告诉客户端可以在HTTP请求中带上Cookie
-	res.header('Access-Control-Allow-Credentials', true);
+	res.header("Access-Control-Allow-Credentials", true);
 	res.header("Access-Control-Allow-Headers",
 		"Origin, No-Cache, X-Requested-With, If-Modified-Since, Pragma, " +
 		"Last-Modified, Cache-Control, Expires, Content-Type," +
-		" Content-Language, Cache-Control, X-E4M-With,X_FILENAME"
+		"Content-Language, Cache-Control, X-E4M-With,X_FILENAME"
 	);
 	res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-	res.header("X-Powered-By", ' 3.2.1')
+	res.header("X-Powered-By", " 3.2.1");
 	res.header("Content-Type", "application/json;charset=utf-8");
 	next();
 });
@@ -51,15 +52,21 @@ app.post("/task", function(req, res) {
 		"ME.ID";
 
 	ibmdb.open(connStr, function(err, conn) {
-		if (err) return console.log(err);
+		if (err) {
+			console.log(err);
+			return;
+		}
 		conn.query(querySQL,
 			function(err, data) {
-				if (err) console.log(err);
-				else console.log(data);
-				res.json(data);
-				conn.close(function() {
-					console.log('done');
-				});
+				if (err) {
+					console.log(err);
+				} else {
+					console.log(data);
+					res.json(data);
+					conn.close(function() {
+						console.log('done');
+					});
+				}
 			});
 	});
 
@@ -87,15 +94,21 @@ app.post("/learn", function(req, res) {
 		"MULS.LAST_UPDATED";
 
 	ibmdb.open(connStr, function(err, conn) {
-		if (err) return console.log(err);
+		if (err) {
+			console.log(err);
+			return;
+		}
 		conn.query(querySQL,
 			function(err, data) {
-				if (err) console.log(err);
-				else console.log(data);
-				res.json(data);
-				conn.close(function() {
-					console.log('done');
-				});
+				if (err) {
+					console.log(err);
+				} else {
+					console.log(data);
+					res.json(data);
+					conn.close(function() {
+						console.log('done');
+					});
+				}
 			});
 	});
 
