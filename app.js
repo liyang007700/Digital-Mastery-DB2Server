@@ -28,7 +28,6 @@ app.all("*", function(req, res, next) {
 	res.header("Content-Type", "application/json;charset=utf-8");
 	next();
 });
-
 // Handle Task search Post Request and send query result
 app.post("/task", function(req, res) {
 	var connStr =
