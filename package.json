@@ -15,5 +15,9 @@
     "ejs": "^2.5.3",
     "express": "^4.14.0",
     "ibm_db": "^1.0.1"
+  },
+  "devDependencies": {
+    "lite-server": "^2.2.0",
+    "concurrently": "^2.0.0"
   }
 }

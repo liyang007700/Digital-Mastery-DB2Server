@@ -1,3 +1,4 @@
+/* eslint-env node */
 var express = require("express");
 var bodyParser = require("body-parser");
 var ibmdb = require("ibm_db");
@@ -13,7 +14,7 @@ app.use(bodyParser.urlencoded({
 
 // configure HTTP respond header to allow CROS and MIME content-type
 app.all("*", function(req, res, next) {
-	use strict;
+	"use strict";
 	res.header("Access-Control-Allow-Origin", req.headers.origin);
 
 	// 告诉客户端可以在HTTP请求中带上Cookie
